@@ -91,7 +91,7 @@ describe("LandingPage App Component", () => {
     // Should now display Spanish content
     expect(
       screen.getAllByText(
-        /Armonizando 24 Años de Observaciones Satelitales de Fuego/i,
+        /Armonizando 26 Años de Observaciones Satelitales de Fuego/i,
       )[0],
     ).toBeInTheDocument();
     expect(

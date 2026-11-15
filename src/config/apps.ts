@@ -32,9 +32,9 @@ export const APPS_CONFIG: Record<'observation' | 'prediction', AppConfig> = {
     taglineEn: 'FHI (Fire History Interface) · Earth Observation & Satellite Harmonization',
     taglineEs: 'FHI (Fire History Interface) · Observación Terrestre y Armonización Satelital',
     descriptionEn:
-      'Interactive scientific platform providing 24 years (2000–present) of unified MODIS and VIIRS active fire observations across Argentina, 3D orbital visualization, regional anomaly diagnostics, and open data export.',
+      'Interactive scientific platform providing 26 years (2000–present) of unified MODIS and VIIRS active fire observations across Argentina, 3D orbital visualization, regional anomaly diagnostics, and open data export.',
     descriptionEs:
-      'Plataforma científica interactiva con 24 años (2000–hoy) de observaciones unificadas de focos activos MODIS y VIIRS en Argentina, visualización orbital 3D, diagnóstico de anomalías y exportación de datos abiertos.',
+      'Plataforma científica interactiva con 26 años (2000–hoy) de observaciones unificadas de focos activos MODIS y VIIRS en Argentina, visualización orbital 3D, diagnóstico de anomalías y exportación de datos abiertos.',
     badgeEn: 'Live Application',
     badgeEs: 'Aplicación en Vivo',
     url: EXTERNAL_LINKS.fhi,

@@ -8,11 +8,11 @@
   },
   "hero": {
     "agency": "NASA Space Apps Challenge 2026",
-    "headline": "Armonizando 24 Años de Observaciones Satelitales de Fuego",
+    "headline": "Armonizando 26 Años de Observaciones Satelitales de Fuego",
     "subheadline": "FHI (Fire History Interface) unifica dos décadas de registros térmicos de MODIS y VIIRS en una serie histórica coherente para Argentina, superando la diferencia de escala entre sensores orbitales.",
     "ctaObservation": "Explorar Fire History Interface",
     "ctaPrediction": "App de Predicción",
-    "ctaObsSub": "Sistema 24 Años · MODIS y VIIRS",
+    "ctaObsSub": "Sistema 26 Años · MODIS y VIIRS",
     "ctaPredSub": "Riesgo Territorial · Experimental"
   },
   "challenge": {
@@ -27,9 +27,9 @@
   },
   "solution": {
     "title": "Nuestra Solución: FHI (Fire History Interface)",
-    "paragraph1": "Construimos FHI (Fire History Interface), una plataforma abierta e interactiva para explorar observaciones satelitales en Argentina, comparar datos de MODIS y VIIRS y analizar 24 años de actividad de fuego en una escala unificada.",
+    "paragraph1": "Construimos FHI (Fire History Interface), una plataforma abierta e interactiva para explorar observaciones satelitales en Argentina, comparar datos de MODIS y VIIRS y analizar 26 años de actividad de fuego en una escala unificada.",
     "paragraph2": "El sistema combina visualización geoespacial en 3D con una matriz mensual continua y detección estadística de anomalías, diferenciando con claridad los datos observados directamente de las estimaciones previas a 2012.",
-    "caption": "Sistema de observación FHI: visualización satelital 3D junto a la matriz histórica de 24 años.",
+    "caption": "Sistema de observación FHI: visualización satelital 3D junto a la matriz histórica de 26 años.",
     "cta": "Explorar Fire History Interface"
   },
   "prediction": {
@@ -83,7 +83,7 @@
   },
   "footer": {
     "brand": "FHI · Fire History Interface",
-    "tagline": "Consolidando 24 años de observaciones satelitales de MODIS y VIIRS en Argentina.",
+    "tagline": "Consolidando 26 años de observaciones satelitales de MODIS y VIIRS en Argentina.",
     "challengeInfo": "NASA Space Apps Challenge 2026 · Armonización de Focos de Calor MODIS y VIIRS",
     "challengeLink": "Página Oficial del Desafío NASA",
     "navTitle": "Navegación",
@@ -99,7 +99,7 @@
     "inDevelopment": "En Desarrollo",
     "close": "Cerrar",
     "exploreObs": "Explorar Fire History Interface",
-    "obsSubtitle": "Matriz 24 Años · MODIS y VIIRS",
+    "obsSubtitle": "Matriz 26 Años · MODIS y VIIRS",
     "explorePred": "App de Predicción",
     "predSubtitle": "Riesgo Territorial · Experimental",
     "modalHeader": "Acceso a las Aplicaciones",

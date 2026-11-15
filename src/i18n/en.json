@@ -12,7 +12,7 @@
     "subheadline": "FHI (Fire History Interface) unifies two decades of MODIS and VIIRS thermal records into a consistent historical series across Argentina, bridging the scale gap between orbital sensors.",
     "ctaObservation": "Explore Fire History Interface",
     "ctaPrediction": "Fire Prediction App",
-    "ctaObsSub": "24-Year System · MODIS & VIIRS",
+    "ctaObsSub": "26-Year System · MODIS & VIIRS",
     "ctaPredSub": "Territorial Risk · Experimental"
   },
   "challenge": {
@@ -27,9 +27,9 @@
   },
   "solution": {
     "title": "Our Solution: FHI (Fire History Interface)",
-    "paragraph1": "We built FHI (Fire History Interface), an open interactive platform designed to explore satellite observations across Argentina, compare MODIS and VIIRS data, and analyze 24 years of fire activity on a unified scale.",
+    "paragraph1": "We built FHI (Fire History Interface), an open interactive platform designed to explore satellite observations across Argentina, compare MODIS and VIIRS data, and analyze 26 years of fire activity on a unified scale.",
     "paragraph2": "The system combines 3D geospatial visualization with a continuous monthly calendar matrix and statistical anomaly detection, differentiating directly observed data from pre-2012 estimates.",
-    "caption": "FHI observation system: 3D satellite visualization alongside the 24-year historical calendar matrix.",
+    "caption": "FHI observation system: 3D satellite visualization alongside the 26-year historical calendar matrix.",
     "cta": "Explore Fire History Interface"
   },
   "prediction": {
@@ -83,7 +83,7 @@
   },
   "footer": {
     "brand": "FHI · Fire History Interface",
-    "tagline": "Consolidating 24 years of MODIS and VIIRS satellite fire observations across Argentina.",
+    "tagline": "Consolidating 26 years of MODIS and VIIRS satellite fire observations across Argentina.",
     "challengeInfo": "NASA Space Apps Challenge 2026 · Harmonization of MODIS and VIIRS Hot Spots",
     "challengeLink": "Official NASA Challenge Page",
     "navTitle": "Navigation",
@@ -99,7 +99,7 @@
     "inDevelopment": "In Development",
     "close": "Close",
     "exploreObs": "Explore Fire History Interface",
-    "obsSubtitle": "24-Year Matrix · MODIS & VIIRS",
+    "obsSubtitle": "26-Year Matrix · MODIS & VIIRS",
     "explorePred": "Fire Prediction App",
     "predSubtitle": "Territorial Risk · Experimental",
     "modalHeader": "Application Access",
