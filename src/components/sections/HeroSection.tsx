@@ -14,23 +14,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
     <section
       id="hero"
       aria-label="FHI Hero"
-      className="pt-28 sm:pt-36 pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#1D322C] bg-transparent"
+      className="relative min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] flex items-center pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 border-b border-[#1D322C] bg-[#040908] overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10">
-        {/* Editorial Heading & Subheading */}
-        <div className="max-w-3xl space-y-4">
-          <div className="text-xs font-mono uppercase tracking-wider text-[#B8EE68]">
-            {t('hero.agency')}
+      {/* 3D Planet Background Visual (Integrated behind and to the right of the headline) */}
+      <div
+        className="absolute top-1/2 -translate-y-1/2 -right-12 sm:-right-8 md:right-0 lg:-right-6 xl:right-2 w-full sm:w-[88%] md:w-[75%] lg:w-[62%] xl:w-[58%] h-[500px] sm:h-[600px] lg:h-[720px] pointer-events-auto z-0 select-none flex items-center justify-center lg:justify-end"
+        aria-hidden="true"
+      >
+        <HeroPlanet3D />
+      </div>
+
+      {/* Localized Contrast Vignette Mask: Guarantees effortless editorial text legibility */}
+      <div
+        className="absolute inset-y-0 left-0 w-full sm:w-[85%] md:w-[72%] lg:w-[56%] z-10 pointer-events-none bg-gradient-to-r from-[#040908] via-[#040908]/92 via-50% to-transparent hidden sm:block"
+        aria-hidden="true"
+      />
+      {/* Mobile Contrast Backdrop: Soft darkened overlay so mobile text remains perfectly crisp */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none bg-[#040908]/75 sm:hidden"
+        aria-hidden="true"
+      />
+
+      {/* Foreground Editorial Content: Agency Badge, Headline, Subheadline & Primary Dual CTAs */}
+      <div className="relative z-20 max-w-6xl mx-auto w-full pointer-events-none">
+        <div className="max-w-2xl lg:max-w-[560px] xl:max-w-[620px] space-y-6 sm:space-y-8 pointer-events-auto">
+          <div className="space-y-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#B8EE68]">
+              {t('hero.agency')}
+            </div>
+            <h1 className="font-title text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#EFF5ED] leading-[1.12]">
+              {t('hero.headline')}
+            </h1>
+            <p className="font-sans text-base sm:text-lg text-[#93A39C] leading-relaxed max-w-2xl">
+              {t('hero.subheadline')}
+            </p>
           </div>
-          <h1 className="font-title text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#EFF5ED] leading-[1.12]">
-            {t('hero.headline')}
-          </h1>
-          <p className="font-sans text-base sm:text-lg text-[#93A39C] leading-relaxed max-w-2xl">
-            {t('hero.subheadline')}
-          </p>
 
           {/* Dual Action CTAs for Direct System Access */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-3">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
             {/* Primary Action: Explore FHI System */}
             <button
               type="button"
@@ -60,11 +81,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Protagonist Visual: 3D Earth with Orbiting MODIS & VIIRS Satellites */}
-        <div className="w-full">
-          <HeroPlanet3D />
+      {/* Subtle Constellation Telemetry Legend */}
+      <div className="hidden lg:flex items-center gap-4 absolute bottom-6 right-8 z-20 pointer-events-none font-mono text-[11px] text-[#93A39C]">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#68D9D0]" />
+          <span>Terra (MODIS)</span>
         </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#B8EE68]" />
+          <span>Aqua (MODIS)</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#FF9C55]" />
+          <span>Suomi NPP (VIIRS)</span>
+        </div>
+        <span className="text-[#314640]">|</span>
+        <span className="text-[#93A39C]/70">Drag to rotate</span>
       </div>
     </section>
   );
