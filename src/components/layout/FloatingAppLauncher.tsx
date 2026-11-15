@@ -135,51 +135,50 @@ export const FloatingAppLauncher: React.FC<FloatingAppLauncherProps> = () => {
         aria-label={t('launcher.title')}
         aria-hidden={!showAppButtons}
         className={clsx(
-          "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col sm:flex-row items-end sm:items-center gap-2.5 sm:gap-3.5 select-none filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.7)] transition-all duration-300 motion-reduce:transition-none motion-reduce:transform-none",
+          "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-3 select-none filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.7)] transition-all duration-300 motion-reduce:transition-none motion-reduce:transform-none",
           showAppButtons
             ? "opacity-100 translate-y-0 visible pointer-events-auto"
             : "opacity-0 translate-y-4 invisible pointer-events-none"
         )}
       >
-        {/* Button 1: Explore Fire History Interface (Observation System - Primary CTA) */}
+        {/* Button 1: Explore Fire History Interface (Dominant Primary Action) */}
         <a
           href={EXTERNAL_LINKS.fhi}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={showAppButtons ? 0 : -1}
-          className="flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] border border-[#B8EE68] shadow-[0_0_24px_rgba(184,238,104,0.35)] hover:shadow-[0_0_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+          className="flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-6 py-2.5 sm:py-3.5 min-h-[48px] sm:min-h-[52px] bg-[#B8EE68] hover:bg-[#C8F77B] active:bg-[#A8DE58] text-[#071310] border-2 border-[#B8EE68] shadow-[0_4px_24px_rgba(184,238,104,0.35)] hover:shadow-[0_6px_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
           title={t('launcher.exploreObs')}
         >
           {/* Signal Indicator Dot */}
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#071310] opacity-60"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#071310]"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#071310]"></span>
           </span>
 
-          <span className="font-title font-bold text-xs sm:text-sm text-[#071310] leading-tight flex items-center gap-1.5">
+          <span className="font-title font-bold text-xs sm:text-sm text-[#071310] leading-tight tracking-tight flex items-center gap-1.5">
             {t('launcher.exploreObs')}
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="w-4 h-4 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </a>
 
-        {/* Button 2: Fire Prediction App (Prediction - Secondary Companion CTA) */}
+        {/* Button 2: Fire Prediction App (Secondary Companion CTA - Compact Outline Surface) */}
         <a
           href={EXTERNAL_LINKS.predict}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={showAppButtons ? 0 : -1}
-          className="flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#0A1714]/95 hover:bg-[#0F241F] text-[#EFF5ED] border border-[#FF9C55]/70 hover:border-[#FF9C55] shadow-[0_0_20px_rgba(255,156,85,0.2)] hover:shadow-[0_0_28px_rgba(255,156,85,0.35)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+          className="flex-initial flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2 min-h-[44px] bg-[#06120F]/95 hover:bg-[#0B1E19] active:bg-[#0E251F] text-[#CAD5CE] hover:text-[#EFF5ED] border border-[#213832] hover:border-[#FF9C55]/60 shadow-[0_2px_12px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
           title={t('launcher.explorePred')}
         >
           {/* Thermal Indicator Dot */}
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF9C55] opacity-50"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]/85"></span>
           </span>
 
-          <span className="font-title font-semibold text-xs sm:text-sm text-[#EFF5ED] leading-tight flex items-center gap-1.5">
+          <span className="font-title font-medium text-[11px] sm:text-xs text-[#CAD5CE] group-hover:text-[#EFF5ED] leading-tight flex items-center gap-1.5">
             {t('launcher.explorePred')}
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="w-3 h-3 text-[#93A39C] transition-colors group-hover:text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </a>
       </aside>

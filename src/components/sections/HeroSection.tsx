@@ -51,36 +51,35 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             </p>
           </div>
 
-          {/* Dual Action CTAs for Direct System Access */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
-            {/* Primary Action: Explore FHI System */}
+          {/* Dual Action CTAs: Strict Hierarchy (Primary FHI vs Secondary Companion Predict) */}
+          <div className="flex flex-wrap items-center gap-3.5 sm:gap-5 pt-1 sm:pt-2">
+            {/* Primary Action: Explore FHI System (Dominant visual anchor) */}
             <a
               href={EXTERNAL_LINKS.fhi}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 min-h-[46px] bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] font-title font-bold text-xs sm:text-sm border border-[#B8EE68] shadow-[0_0_24px_rgba(184,238,104,0.35)] hover:shadow-[0_0_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] group"
+              className="inline-flex items-center gap-3 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[52px] sm:min-h-[56px] bg-[#B8EE68] hover:bg-[#C8F77B] active:bg-[#A8DE58] text-[#071310] font-title font-bold text-sm sm:text-base border-2 border-[#B8EE68] shadow-[0_4px_24px_rgba(184,238,104,0.32)] hover:shadow-[0_6px_32px_rgba(184,238,104,0.48)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#040908] group"
             >
-              <span className="relative flex h-2 w-2">
+              <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#071310] opacity-60"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#071310]"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#071310]"></span>
               </span>
               <span>{t('hero.ctaObservation')}</span>
-              <ArrowUpRight className="w-4 h-4 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="w-4.5 h-4.5 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
-            {/* Secondary Action: Companion Fire Prediction App */}
+            {/* Secondary Action: Companion Fire Prediction App (Discreet outline/dark surface) */}
             <a
               href={EXTERNAL_LINKS.predict}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 min-h-[46px] bg-[#0A1A16]/90 hover:bg-[#102B24] text-[#EFF5ED] border border-[#FF9C55]/70 hover:border-[#FF9C55] font-title font-semibold text-xs sm:text-sm shadow-[0_0_20px_rgba(255,156,85,0.2)] hover:shadow-[0_0_28px_rgba(255,156,85,0.35)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] group"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[44px] bg-[#06120F]/85 hover:bg-[#0B1E19] active:bg-[#0E251F] text-[#CAD5CE] hover:text-[#EFF5ED] border border-[#213832] hover:border-[#FF9C55]/60 font-title font-medium text-xs sm:text-sm shadow-[0_2px_12px_rgba(0,0,0,0.4)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.6)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#040908] group"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF9C55] opacity-50"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]/85"></span>
               </span>
               <span>{t('hero.ctaPrediction')}</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#93A39C] transition-colors group-hover:text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>

@@ -37,8 +37,12 @@ export const SolutionSection: React.FC<SolutionSectionProps> = () => {
               href={EXTERNAL_LINKS.fhi}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] font-title font-bold text-xs sm:text-sm border border-[#B8EE68] shadow-[0_0_20px_rgba(184,238,104,0.3)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] group"
+              className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 min-h-[48px] sm:min-h-[52px] bg-[#B8EE68] hover:bg-[#C8F77B] active:bg-[#A8DE58] text-[#071310] font-title font-bold text-xs sm:text-sm tracking-tight border-2 border-[#B8EE68] shadow-[0_4px_20px_rgba(184,238,104,0.3)] hover:shadow-[0_6px_28px_rgba(184,238,104,0.45)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#040908] group"
             >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#071310] opacity-60"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#071310]"></span>
+              </span>
               <span>{t('solution.cta')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>

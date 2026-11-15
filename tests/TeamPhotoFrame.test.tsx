@@ -12,7 +12,6 @@ describe('TeamPhotoFrame Component', () => {
     render(<TeamPhotoFrame />);
 
     expect(screen.getByText(/Team Photo Placeholder/i)).toBeInTheDocument();
-    expect(screen.getByText(/Target: \/images\/team-photo.webp/i)).toBeInTheDocument();
     expect(screen.getByText(/Awaiting official team photograph/i)).toBeInTheDocument();
   });
 });

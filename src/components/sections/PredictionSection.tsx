@@ -37,9 +37,12 @@ export const PredictionSection: React.FC<PredictionSectionProps> = () => {
               href={EXTERNAL_LINKS.predict}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#0C1E1A]/95 hover:bg-[#122B25] text-[#EFF5ED] border border-[#FF9C55]/80 hover:border-[#FF9C55] font-title font-semibold text-xs sm:text-sm shadow-[0_0_20px_rgba(255,156,85,0.22)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] group"
+              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 min-h-[46px] bg-[#06120F]/90 hover:bg-[#0B1E19] active:bg-[#0E251F] text-[#EFF5ED] border border-[#263D36] hover:border-[#FF9C55]/70 font-title font-semibold text-xs sm:text-sm shadow-[0_2px_14px_rgba(0,0,0,0.4)] hover:shadow-[0_4px_20px_rgba(255,156,85,0.2)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#040908] group"
             >
-              <span className="w-2 h-2 rounded-full bg-[#FF9C55] animate-pulse-subtle" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF9C55] opacity-50"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]"></span>
+              </span>
               <span>{t('prediction.cta')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
