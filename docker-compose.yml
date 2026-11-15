@@ -1,0 +1,10 @@
+services:
+  landing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fhi-landing:latest
+    container_name: fhi-landing-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
