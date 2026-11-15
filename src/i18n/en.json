@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "challenge": "The Challenge",
+    "solution": "Solution",
+    "prediction": "Prediction",
+    "team": "Team",
+    "switchLang": "ES"
+  },
+  "hero": {
+    "agency": "NASA Space Apps Challenge 2026",
+    "headline": "Harmonizing 24 Years of Satellite Fire Observations",
+    "subheadline": "FHI (Fire History Interface) unifies two decades of MODIS and VIIRS thermal records into a consistent historical series across Argentina, bridging the scale gap between orbital sensors.",
+    "ctaObservation": "Explore FHI Platform",
+    "ctaPrediction": "Fire Prediction App",
+    "ctaObsSub": "24-Year System · MODIS & VIIRS",
+    "ctaPredSub": "Territorial Risk · Experimental"
+  },
+  "challenge": {
+    "tag": "NASA Space Apps Challenge",
+    "title": "The Challenge: Harmonization of MODIS and VIIRS Hot Spots",
+    "paragraph1": "Since 2000, NASA's MODIS sensor has monitored thermal anomalies at 1 km resolution. In 2012, the VIIRS instrument introduced higher resolution observations at 375 m. Because a VIIRS pixel covers roughly one-seventh the area of a MODIS pixel, it detects three to four times more hot spots under the same fire conditions.",
+    "paragraph2": "Comparing raw counts directly creates a false impression of an abrupt wildfire increase, when only the satellite sensor changed. Furthermore, a satellite hot spot is a thermal detection within an observation cell, not necessarily an individual fire.",
+    "officialLink": "Official NASA Challenge Page",
+    "modisLabel": "MODIS (1 km nominal pixel)",
+    "viirsLabel": "VIIRS (375 m pixel)",
+    "scaleNote": "A single MODIS observation cell contains approximately 7 VIIRS cells."
+  },
+  "solution": {
+    "title": "Our Solution: FHI (Fire History Interface)",
+    "paragraph1": "We built FHI (Fire History Interface), an open interactive platform designed to explore satellite observations across Argentina, compare MODIS and VIIRS data, and analyze 24 years of fire activity on a unified scale.",
+    "paragraph2": "The system combines 3D geospatial visualization with a continuous monthly calendar matrix and statistical anomaly detection, differentiating directly observed data from pre-2012 estimates.",
+    "caption": "FHI observation system: 3D satellite visualization alongside the 24-year historical calendar matrix.",
+    "cta": "Explore FHI Platform"
+  },
+  "prediction": {
+    "title": "Companion Fire Prediction App",
+    "paragraph1": "As a complement to FHI, our team developed an experimental fire prediction tool focused on forward-looking territorial risk assessment.",
+    "paragraph2": "While the main platform provides the historical and harmonized baseline, the prediction app models environmental variables and territory vulnerability to help anticipate severe fire conditions.",
+    "caption": "Companion prediction application: forward-looking territorial risk zoning and environmental indicators.",
+    "cta": "Explore Prediction App",
+    "status": "In Development"
+  },
+  "team": {
+    "title": "The Team Behind the Project",
+    "description": "Developed by an interdisciplinary team from Argentina for the NASA Space Apps Challenge 2026, combining software engineering, remote sensing, and design.",
+    "photoPlaceholder": {
+      "title": "Team Photo Placeholder",
+      "note": "Awaiting official team photograph (team-photo.webp)",
+      "caption": "Team FHI (Fire History Interface) · NASA Space Apps Challenge 2026"
+    }
+  },
+  "footer": {
+    "brand": "FHI · Fire History Interface",
+    "tagline": "Consolidating 24 years of MODIS and VIIRS satellite fire observations across Argentina.",
+    "challengeInfo": "NASA Space Apps Challenge 2026 · Harmonization of MODIS and VIIRS Hot Spots",
+    "challengeLink": "Official NASA Challenge Page",
+    "navTitle": "Navigation",
+    "sensorsTitle": "Sensors & Scope",
+    "disclaimer": "FHI is an independent open-science research project developed for the NASA Space Apps Challenge 2026. It is not an official NASA product and is not affiliated with or endorsed by NASA.",
+    "copyright": "© 2026 Team FHI · Open Science.",
+    "modisSpec": "MODIS (Terra & Aqua · 1 km)",
+    "viirsSpec": "VIIRS (Suomi NPP · 375 m)"
+  },
+  "launcher": {
+    "title": "Application Ecosystem",
+    "comingSoon": "Coming Soon",
+    "inDevelopment": "In Development",
+    "close": "Close",
+    "exploreObs": "Explore FHI",
+    "obsSubtitle": "24-Year Matrix · MODIS & VIIRS",
+    "explorePred": "Fire Prediction App",
+    "predSubtitle": "Territorial Risk · Experimental",
+    "modalHeader": "Application Access",
+    "modalSubtitle": "Both ecosystem applications are currently prepared for challenge jury evaluation.",
+    "reviewNote": "The complete observation system is fully built in the frontend repository. Live access will activate following final deployment and judging configuration.",
+    "understandBtn": "Understood"
+  }
+}
