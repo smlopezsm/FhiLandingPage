@@ -384,7 +384,13 @@ export const HeroPlanet3D: React.FC = () => {
     viirsOrbitGroup.add(viirsHolder);
 
     // Load Real NASA 3D Models with GLTFLoader (with procedural backup)
-    const gltfLoader = new GLTFLoader();
+    const loadingManager = new THREE.LoadingManager();
+    const fallbackTgaTexture =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+    loadingManager.setURLModifier((url) =>
+      url.toLowerCase().endsWith('.tga') ? fallbackTgaTexture : url
+    );
+    const gltfLoader = new GLTFLoader(loadingManager);
 
     const loadSatelliteModel = (
       modelPath: string,

@@ -12,8 +12,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-8 border-b border-[#1D322C]">
           {/* Col 1: Identity & Mission (md:col-span-5) */}
           <div className="md:col-span-5 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B8EE68] shadow-[0_0_10px_#B8EE68]" />
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/images/logo-fhi.png"
+                alt="Fire History Interface"
+                className="h-7 w-7 shrink-0 rounded-full object-cover"
+              />
               <span className="font-title text-base font-bold text-[#EFF5ED] tracking-tight">
                 FHI <span className="text-[#93A39C] font-normal">· Fire History Interface</span>
               </span>

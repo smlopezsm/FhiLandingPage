@@ -52,10 +52,6 @@ export const TeamPhotoFrame: React.FC = () => {
               {t('team.photoPlaceholder.note')}
             </p>
           </div>
-
-          <div className="text-[11px] font-mono text-[#687771] pt-1">
-            Target: /images/team-photo.webp
-          </div>
         </div>
       )}
     </div>

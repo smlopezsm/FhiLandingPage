@@ -47,8 +47,13 @@ export const Header: React.FC = () => {
           {/* Brand */}
           <a
             href="#"
-            className="flex items-center gap-2 group focus:outline-none focus-visible:underline"
+            className="flex items-center gap-2.5 group focus:outline-none focus-visible:underline"
           >
+            <img
+              src="/images/logo-fhi.png"
+              alt="Fire History Interface"
+              className="h-8 w-8 shrink-0 rounded-full object-cover"
+            />
             <span className="font-title text-base sm:text-lg font-bold tracking-tight text-[#EFF5ED]">
               FHI <span className="text-[#B8EE68] font-normal text-xs sm:text-sm font-mono">Fire History Interface</span>
             </span>
