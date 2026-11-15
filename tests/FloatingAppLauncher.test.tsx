@@ -1,12 +1,15 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { FloatingAppLauncher } from '../src/components/layout/FloatingAppLauncher';
 import { EXTERNAL_LINKS } from '../src/config/externalLinks';
+import { DOCUMENTATION_URLS } from '../src/config/docs';
 import i18n from '../src/i18n';
 
 describe('FloatingAppLauncher Component', () => {
   beforeEach(() => {
-    i18n.changeLanguage('en');
+    act(() => {
+      i18n.changeLanguage('en');
+    });
   });
 
   it('renders both floating action links pointing to official application URLs in a new tab', () => {
@@ -26,17 +29,26 @@ describe('FloatingAppLauncher Component', () => {
     expect(predLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('renders permanent documentation button and shows status notice when clicked', () => {
-    render(<FloatingAppLauncher />);
+  it('renders bilingual documentation link dynamically adapting to active language', () => {
+    // 1. In English by default
+    const { rerender } = render(<FloatingAppLauncher />);
 
-    const docBtn = screen.getByRole('button', { name: /Documentation/i });
-    expect(docBtn).toBeInTheDocument();
-    expect(screen.getByText(/Coming Soon/i)).toBeInTheDocument();
+    const docLinkEn = screen.getByRole('link', { name: /Documentation/i });
+    expect(docLinkEn).toBeInTheDocument();
+    expect(docLinkEn).toHaveAttribute('href', DOCUMENTATION_URLS.en);
+    expect(docLinkEn).toHaveAttribute('target', '_blank');
+    expect(docLinkEn).toHaveAttribute('rel', 'noopener noreferrer');
 
-    fireEvent.click(docBtn);
-    expect(screen.getByRole('status')).toBeInTheDocument();
-    expect(
-      screen.getByText(/Official project documentation in preparation/i)
-    ).toBeInTheDocument();
+    // 2. Change language to Spanish dynamically
+    act(() => {
+      i18n.changeLanguage('es');
+    });
+    rerender(<FloatingAppLauncher />);
+
+    const docLinkEs = screen.getByRole('link', { name: /Documentación/i });
+    expect(docLinkEs).toBeInTheDocument();
+    expect(docLinkEs).toHaveAttribute('href', DOCUMENTATION_URLS.es);
+    expect(docLinkEs).toHaveAttribute('target', '_blank');
+    expect(docLinkEs).toHaveAttribute('rel', 'noopener noreferrer');
   });
 });

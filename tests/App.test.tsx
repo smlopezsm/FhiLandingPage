@@ -74,9 +74,11 @@ describe("LandingPage App Component", () => {
     expect(predSectionLink).toHaveAttribute("target", "_blank");
     expect(predSectionLink).toHaveAttribute("rel", "noopener noreferrer");
 
-    expect(
-      screen.getByRole("button", { name: /Documentation/i }),
-    ).toBeInTheDocument();
+    const docLink = screen.getByRole("link", { name: /Documentation/i });
+    expect(docLink).toBeInTheDocument();
+    expect(docLink).toHaveAttribute("href", "https://drive.google.com/file/d/1eEvTVNce6dAoDNruAv2H0gyH0JkkeSVO/view?usp=sharing");
+    expect(docLink).toHaveAttribute("target", "_blank");
+    expect(docLink).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   it("toggles language between English and Spanish seamlessly", () => {
@@ -114,9 +116,13 @@ describe("LandingPage App Component", () => {
     expect(screen.getByText("Deportista de Alto Rendimiento")).toBeInTheDocument();
     expect(screen.getByText("Desarrollador y Liderazgo")).toBeInTheDocument();
     expect(screen.getByText("Estudiante de Tecnicatura en Desarrollo de Software")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Documentación/i }),
-    ).toBeInTheDocument();
+
+    // Verify Spanish documentation link
+    const docLinkEs = screen.getByRole("link", { name: /Documentación/i });
+    expect(docLinkEs).toBeInTheDocument();
+    expect(docLinkEs).toHaveAttribute("href", "https://drive.google.com/file/d/1alJxJ_NnEncDIjuRXG7Wu-5tf3Y-m7LE/view?usp=sharing");
+    expect(docLinkEs).toHaveAttribute("target", "_blank");
+    expect(docLinkEs).toHaveAttribute("rel", "noopener noreferrer");
 
     // Verify Spanish application links
     const fhiLinksEs = screen.getAllByRole("link", { name: /Explorar Fire History Interface/i });
