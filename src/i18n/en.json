@@ -8,9 +8,9 @@
   },
   "hero": {
     "agency": "NASA Space Apps Challenge 2026",
-    "headline": "Harmonizing 24 Years of Satellite Fire Observations",
+    "headline": "Harmonizing 26 Years of Satellite Fire Observations",
     "subheadline": "FHI (Fire History Interface) unifies two decades of MODIS and VIIRS thermal records into a consistent historical series across Argentina, bridging the scale gap between orbital sensors.",
-    "ctaObservation": "Explore FHI Platform",
+    "ctaObservation": "Explore Fire History Interface",
     "ctaPrediction": "Fire Prediction App",
     "ctaObsSub": "24-Year System · MODIS & VIIRS",
     "ctaPredSub": "Territorial Risk · Experimental"
@@ -30,7 +30,7 @@
     "paragraph1": "We built FHI (Fire History Interface), an open interactive platform designed to explore satellite observations across Argentina, compare MODIS and VIIRS data, and analyze 24 years of fire activity on a unified scale.",
     "paragraph2": "The system combines 3D geospatial visualization with a continuous monthly calendar matrix and statistical anomaly detection, differentiating directly observed data from pre-2012 estimates.",
     "caption": "FHI observation system: 3D satellite visualization alongside the 24-year historical calendar matrix.",
-    "cta": "Explore FHI Platform"
+    "cta": "Explore Fire History Interface"
   },
   "prediction": {
     "title": "Companion Fire Prediction App",
@@ -42,12 +42,44 @@
   },
   "team": {
     "title": "The Team Behind the Project",
-    "description": "Developed by an interdisciplinary team from Argentina for the NASA Space Apps Challenge 2026, combining software engineering, remote sensing, and design.",
+    "description": "We are a team of six people from Argentina, brought together by technology, innovation, and the desire to make a real impact. Our team includes students and professionals from software development, education, and emergency response. With diverse backgrounds and a shared vision, we created FHI (Fire History Interface) to turn satellite data into useful and accessible information, demonstrating that the best solutions emerge from combining knowledge, creativity, and teamwork.",
+    "members": [
+      {
+        "name": "Santiago López",
+        "role": "Computer Engineering Student"
+      },
+      {
+        "name": "Juan Alberto Rivero",
+        "role": "Computer Science Teacher"
+      },
+      {
+        "name": "Jonathan Alexis Rivero",
+        "role": "Firefighter & Software Developer"
+      },
+      {
+        "name": "Valentín Martínez",
+        "role": "High-Performance Athlete"
+      },
+      {
+        "name": "Gastón Sosa",
+        "role": "Software Developer & Team Leadership"
+      },
+      {
+        "name": "Pablo Denis",
+        "role": "Software Development Student"
+      }
+    ],
     "photoPlaceholder": {
       "title": "Team Photo Placeholder",
       "note": "Awaiting official team photograph (team-photo.webp)",
       "caption": "Team FHI (Fire History Interface) · NASA Space Apps Challenge 2026"
     }
+  },
+  "documentation": {
+    "button": "Documentation",
+    "comingSoon": "Coming Soon",
+    "tooltip": "Official project documentation in preparation · Coming soon",
+    "ariaLabel": "Official Project Documentation"
   },
   "footer": {
     "brand": "FHI · Fire History Interface",
@@ -66,7 +98,7 @@
     "comingSoon": "Coming Soon",
     "inDevelopment": "In Development",
     "close": "Close",
-    "exploreObs": "Explore FHI",
+    "exploreObs": "Explore Fire History Interface",
     "obsSubtitle": "24-Year Matrix · MODIS & VIIRS",
     "explorePred": "Fire Prediction App",
     "predSubtitle": "Territorial Risk · Experimental",

@@ -1,54 +1,154 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X, Clock, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import { APPS_CONFIG, type AppConfig } from '../../config/apps';
+import { ArrowUpRight, FileText } from 'lucide-react';
+import clsx from 'clsx';
+import { EXTERNAL_LINKS } from '../../config/externalLinks';
+import { DOCUMENTATION_PDF_URL } from '../../config/docs';
 
 interface FloatingAppLauncherProps {
   initialOpenApp?: 'observation' | 'prediction' | null;
   onCloseInitial?: () => void;
 }
 
-export const FloatingAppLauncher: React.FC<FloatingAppLauncherProps> = ({
-  initialOpenApp,
-  onCloseInitial,
-}) => {
-  const { t, i18n } = useTranslation();
-  const isSpanish = i18n.language.startsWith('es');
+export const FloatingAppLauncher: React.FC<FloatingAppLauncherProps> = () => {
+  const { t } = useTranslation();
 
-  const [activeModalApp, setActiveModalApp] = useState<AppConfig | null>(
-    initialOpenApp ? APPS_CONFIG[initialOpenApp] : null
-  );
+  // Visibility state for the two application buttons (only shown after scrolling past the Hero)
+  const [showAppButtons, setShowAppButtons] = useState<boolean>(false);
 
-  // Sync with prop when parent triggers opening
-  React.useEffect(() => {
-    if (initialOpenApp) {
-      setActiveModalApp(APPS_CONFIG[initialOpenApp]);
+  // Transient notice for when Documentation PDF is clicked before being configured
+  const [showDocNotice, setShowDocNotice] = useState<boolean>(false);
+  const docNoticeTimerRef = useRef<number | null>(null);
+
+  // Clean timer on unmount
+  useEffect(() => {
+    return () => {
+      if (docNoticeTimerRef.current) {
+        window.clearTimeout(docNoticeTimerRef.current);
+      }
+    };
+  }, []);
+
+  // IntersectionObserver: monitor Hero visibility to reveal app buttons ONLY after passing the Hero
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+      // Graceful fallback for test or SSR environments without DOM intersection
+      setShowAppButtons(true);
+      return;
     }
-  }, [initialOpenApp]);
 
-  const handleOpen = (appId: 'observation' | 'prediction') => {
-    setActiveModalApp(APPS_CONFIG[appId]);
-  };
+    const heroElement = document.getElementById('hero');
+    if (!heroElement) {
+      // If hero element is absent (e.g. isolated unit test), default to visible
+      setShowAppButtons(true);
+      return;
+    }
 
-  const handleClose = () => {
-    setActiveModalApp(null);
-    if (onCloseInitial) onCloseInitial();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // While hero is in view, entry.isIntersecting is true (app buttons hidden)
+        // Once user scrolls past the hero, !entry.isIntersecting and boundingClientRect.top < 0
+        const isPastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        setShowAppButtons(isPastHero);
+      },
+      {
+        threshold: 0,
+        rootMargin: '-30px 0px 0px 0px',
+      }
+    );
+
+    observer.observe(heroElement);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleDocClick = () => {
+    if (!DOCUMENTATION_PDF_URL) {
+      setShowDocNotice(true);
+      if (docNoticeTimerRef.current) {
+        window.clearTimeout(docNoticeTimerRef.current);
+      }
+      docNoticeTimerRef.current = window.setTimeout(() => {
+        setShowDocNotice(false);
+      }, 3500);
+    }
   };
 
   return (
     <>
-      {/* Floating Action Buttons Container (Bottom Dock on Mobile, Bottom-Right on Desktop) */}
+      {/* -------------------------------------------------------------------- */}
+      {/* 1. Permanent PDF Documentation Button (Fixed Bottom-Left Corner)     */}
+      {/* -------------------------------------------------------------------- */}
+      <aside
+        aria-label={t('documentation.ariaLabel')}
+        className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 select-none filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.7)]"
+      >
+        {DOCUMENTATION_PDF_URL ? (
+          <a
+            href={DOCUMENTATION_PDF_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[46px] bg-[#0A1714]/95 hover:bg-[#102B24] text-[#EFF5ED] border border-[#21312D] hover:border-[#B8EE68]/70 shadow-[0_0_20px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+            aria-label={t('documentation.button')}
+          >
+            <FileText className="w-4 h-4 text-[#B8EE68] transition-transform group-hover:scale-110" />
+            <span className="font-title font-semibold text-xs sm:text-sm text-[#EFF5ED] leading-none">
+              {t('documentation.button')}
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#93A39C] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        ) : (
+          <div className="relative">
+            <button
+              type="button"
+              onClick={handleDocClick}
+              className="flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 min-h-[42px] sm:min-h-[46px] bg-[#0A1714]/95 hover:bg-[#102B24] text-[#EFF5ED] border border-[#21312D] hover:border-[#B8EE68]/70 shadow-[0_0_20px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+              aria-label={`${t('documentation.button')} - ${t('documentation.comingSoon')}`}
+              title={`${t('documentation.button')} (${t('documentation.comingSoon')})`}
+            >
+              <FileText className="w-4 h-4 text-[#B8EE68] transition-transform group-hover:scale-110" />
+              <span className="font-title font-semibold text-xs sm:text-sm text-[#EFF5ED] leading-none">
+                {t('documentation.button')}
+              </span>
+              <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-wider text-[#93A39C] bg-[#142621] px-1.5 py-0.5 border border-[#1D322C]">
+                {t('documentation.comingSoon')}
+              </span>
+            </button>
+
+            {/* Accessible Status Notice when clicked prior to PDF publication */}
+            {showDocNotice && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="absolute bottom-full left-0 mb-2 whitespace-nowrap px-3 py-1.5 bg-[#07100F] border border-[#21312D] text-[11px] font-mono text-[#B8EE68] shadow-2xl pointer-events-none animate-in fade-in duration-200"
+              >
+                // {t('documentation.tooltip')}
+              </div>
+            )}
+          </div>
+        )}
+      </aside>
+
+      {/* -------------------------------------------------------------------- */}
+      {/* 2. Application Access Launchers (Fixed Bottom-Right, After Hero)     */}
+      {/* -------------------------------------------------------------------- */}
       <aside
         aria-label={t('launcher.title')}
-        className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-40 flex flex-row items-center justify-end gap-2.5 sm:gap-3.5 select-none filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.7)]"
+        aria-hidden={!showAppButtons}
+        className={clsx(
+          "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col sm:flex-row items-end sm:items-center gap-2.5 sm:gap-3.5 select-none filter drop-shadow-[0_12px_32px_rgba(0,0,0,0.7)] transition-all duration-300 motion-reduce:transition-none motion-reduce:transform-none",
+          showAppButtons
+            ? "opacity-100 translate-y-0 visible pointer-events-auto"
+            : "opacity-0 translate-y-4 invisible pointer-events-none"
+        )}
       >
-        {/* Button 1: Explore FHI (Observation System - Primary CTA) */}
-        <button
-          type="button"
-          onClick={() => handleOpen('observation')}
-          className="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] border border-[#B8EE68] shadow-[0_0_24px_rgba(184,238,104,0.35)] hover:shadow-[0_0_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
-          aria-haspopup="dialog"
-          title={`${t('launcher.exploreObs')} (${t('launcher.comingSoon')})`}
+        {/* Button 1: Explore Fire History Interface (Observation System - Primary CTA) */}
+        <a
+          href={EXTERNAL_LINKS.fhi}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={showAppButtons ? 0 : -1}
+          className="flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] border border-[#B8EE68] shadow-[0_0_24px_rgba(184,238,104,0.35)] hover:shadow-[0_0_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+          title={t('launcher.exploreObs')}
         >
           {/* Signal Indicator Dot */}
           <span className="relative flex h-2 w-2">
@@ -56,24 +156,20 @@ export const FloatingAppLauncher: React.FC<FloatingAppLauncherProps> = ({
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#071310]"></span>
           </span>
 
-          <div className="flex flex-col text-left">
-            <span className="font-title font-bold text-xs sm:text-sm text-[#071310] leading-tight flex items-center gap-1">
-              {t('launcher.exploreObs')}
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-            <span className="font-mono text-[9px] sm:text-[10px] text-[#071310]/80 tracking-tight hidden sm:block">
-              {t('launcher.obsSubtitle')}
-            </span>
-          </div>
-        </button>
+          <span className="font-title font-bold text-xs sm:text-sm text-[#071310] leading-tight flex items-center gap-1.5">
+            {t('launcher.exploreObs')}
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
+        </a>
 
         {/* Button 2: Fire Prediction App (Prediction - Secondary Companion CTA) */}
-        <button
-          type="button"
-          onClick={() => handleOpen('prediction')}
-          className="flex-1 sm:flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#0A1714]/95 hover:bg-[#0F241F] text-[#EFF5ED] border border-[#FF9C55]/70 hover:border-[#FF9C55] shadow-[0_0_20px_rgba(255,156,85,0.2)] hover:shadow-[0_0_28px_rgba(255,156,85,0.35)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
-          aria-haspopup="dialog"
-          title={`${t('launcher.explorePred')} (${t('launcher.inDevelopment')})`}
+        <a
+          href={EXTERNAL_LINKS.predict}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={showAppButtons ? 0 : -1}
+          className="flex-initial flex items-center justify-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 min-h-[46px] sm:min-h-[50px] bg-[#0A1714]/95 hover:bg-[#0F241F] text-[#EFF5ED] border border-[#FF9C55]/70 hover:border-[#FF9C55] shadow-[0_0_20px_rgba(255,156,85,0.2)] hover:shadow-[0_0_28px_rgba(255,156,85,0.35)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07100F] group"
+          title={t('launcher.explorePred')}
         >
           {/* Thermal Indicator Dot */}
           <span className="relative flex h-2 w-2">
@@ -81,104 +177,12 @@ export const FloatingAppLauncher: React.FC<FloatingAppLauncherProps> = ({
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF9C55]"></span>
           </span>
 
-          <div className="flex flex-col text-left">
-            <span className="font-title font-semibold text-xs sm:text-sm text-[#EFF5ED] leading-tight flex items-center gap-1">
-              {t('launcher.explorePred')}
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-            <span className="font-mono text-[9px] sm:text-[10px] text-[#93A39C] tracking-tight hidden sm:block">
-              {t('launcher.predSubtitle')}
-            </span>
-          </div>
-        </button>
+          <span className="font-title font-semibold text-xs sm:text-sm text-[#EFF5ED] leading-tight flex items-center gap-1.5">
+            {t('launcher.explorePred')}
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
+        </a>
       </aside>
-
-      {/* Accessible Informative Modal for Coming Soon Launch */}
-      {activeModalApp && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="app-modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={handleClose}
-        >
-          <div
-            className="relative w-full max-w-lg border border-[#21312D] bg-[#07100F] p-6 text-[#EFF5ED] shadow-2xl space-y-5 font-mono"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-[#21312D] pb-3 text-xs">
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase text-[#B8EE68] font-bold">
-                  // {t('launcher.modalHeader')}
-                </span>
-                <h3 id="app-modal-title" className="font-title text-base sm:text-lg font-bold text-[#EFF5ED]">
-                  {isSpanish ? activeModalApp.nameEs : activeModalApp.nameEn}
-                </h3>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleClose}
-                className="p-1 border border-[#21312D] text-[#93A39C] hover:text-[#EFF5ED] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#B8EE68]"
-                aria-label={t('launcher.close')}
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Status & Version */}
-            <div className="flex items-center justify-between p-2.5 bg-[#0D1816] border border-[#21312D] text-xs">
-              <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-[#FF9C55]" />
-                <span className="font-semibold text-[#EFF5ED]">
-                  {isSpanish ? activeModalApp.badgeEs : activeModalApp.badgeEn}
-                </span>
-              </div>
-              <span className="text-[#93A39C] text-[11px]">{activeModalApp.version}</span>
-            </div>
-
-            {/* Description */}
-            <p className="text-xs font-sans text-[#93A39C] leading-relaxed">
-              {isSpanish ? activeModalApp.descriptionEs : activeModalApp.descriptionEn}
-            </p>
-
-            {/* Key Capabilities */}
-            <div className="space-y-2 text-xs">
-              <span className="text-[10px] text-[#687771] uppercase tracking-wider block">
-                {isSpanish ? 'COMPONENTES TÉCNICOS' : 'TECHNICAL COMPONENTS'}
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {(isSpanish ? activeModalApp.techEs : activeModalApp.techEn).map((tItem) => (
-                  <span
-                    key={tItem}
-                    className="px-2 py-0.5 border border-[#21312D] bg-[#0A1412] text-[10px] text-[#EFF5ED]"
-                  >
-                    {tItem}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Review Status Note */}
-            <div className="p-3 border-l-2 border-[#B8EE68] bg-[#0D1816] text-[11px] text-[#93A39C] leading-normal flex items-start gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#B8EE68] shrink-0 mt-0.5" />
-              <p>{t('launcher.reviewNote')}</p>
-            </div>
-
-            {/* Action Bar */}
-            <div className="flex items-center justify-end pt-2 border-t border-[#21312D]">
-              <button
-                type="button"
-                onClick={handleClose}
-                className="px-4 py-2 bg-[#B8EE68] hover:bg-[#CBF58C] text-[#07100F] font-mono text-xs font-bold uppercase tracking-wider transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#B8EE68]"
-              >
-                {t('launcher.understandBtn')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

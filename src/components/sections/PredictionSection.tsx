@@ -2,12 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowUpRight } from 'lucide-react';
 import { PredictionInterfacePreview } from '../visual/PredictionInterfacePreview';
+import { EXTERNAL_LINKS } from '../../config/externalLinks';
 
 interface PredictionSectionProps {
-  onOpenLauncher: (appId: 'observation' | 'prediction') => void;
+  onOpenLauncher?: (appId: 'observation' | 'prediction') => void;
 }
 
-export const PredictionSection: React.FC<PredictionSectionProps> = ({ onOpenLauncher }) => {
+export const PredictionSection: React.FC<PredictionSectionProps> = () => {
   const { t } = useTranslation();
 
   return (
@@ -32,15 +33,16 @@ export const PredictionSection: React.FC<PredictionSectionProps> = ({ onOpenLaun
           </p>
 
           <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => onOpenLauncher('prediction')}
+            <a
+              href={EXTERNAL_LINKS.predict}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#0C1E1A]/95 hover:bg-[#122B25] text-[#EFF5ED] border border-[#FF9C55]/80 hover:border-[#FF9C55] font-title font-semibold text-xs sm:text-sm shadow-[0_0_20px_rgba(255,156,85,0.22)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] group"
             >
               <span className="w-2 h-2 rounded-full bg-[#FF9C55] animate-pulse-subtle" />
               <span>{t('prediction.cta')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </a>
           </div>
         </div>
 

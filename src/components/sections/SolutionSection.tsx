@@ -2,12 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowUpRight } from 'lucide-react';
 import { PlatformInterfacePreview } from '../visual/PlatformInterfacePreview';
+import { EXTERNAL_LINKS } from '../../config/externalLinks';
 
 interface SolutionSectionProps {
   onOpenLauncher?: (appId: 'observation' | 'prediction') => void;
 }
 
-export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenLauncher }) => {
+export const SolutionSection: React.FC<SolutionSectionProps> = () => {
   const { t } = useTranslation();
 
   return (
@@ -32,14 +33,15 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenLauncher
           </p>
 
           <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => onOpenLauncher?.('observation')}
+            <a
+              href={EXTERNAL_LINKS.fhi}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] font-title font-bold text-xs sm:text-sm border border-[#B8EE68] shadow-[0_0_20px_rgba(184,238,104,0.3)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] group"
             >
               <span>{t('solution.cta')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </a>
           </div>
         </div>
 

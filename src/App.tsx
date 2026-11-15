@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { FloatingAppLauncher } from './components/layout/FloatingAppLauncher';
@@ -9,16 +9,6 @@ import { PredictionSection } from './components/sections/PredictionSection';
 import { TeamSection } from './components/sections/TeamSection';
 
 export const App: React.FC = () => {
-  const [activeModalApp, setActiveModalApp] = useState<'observation' | 'prediction' | null>(null);
-
-  const handleOpenLauncher = (appId: 'observation' | 'prediction' = 'observation') => {
-    setActiveModalApp(appId);
-  };
-
-  const handleCloseLauncher = () => {
-    setActiveModalApp(null);
-  };
-
   return (
     <div className="min-h-screen bg-[#040908] text-[#EFF5ED] flex flex-col relative selection:bg-[#B8EE68] selection:text-[#07100F] overflow-x-hidden">
       {/* Immersive Space & Earth Observation Living Atmospheric Background */}
@@ -59,16 +49,16 @@ export const App: React.FC = () => {
       {/* Main Content: 4 Core Narrative Blocks + Hero */}
       <main id="main-content" className="flex-1 relative z-10">
         {/* Section A: Hero */}
-        <HeroSection onOpenLauncher={handleOpenLauncher} />
+        <HeroSection />
 
         {/* Section B: The NASA Challenge (01) */}
         <ChallengeSection />
 
         {/* Section C: Our Solution (02) */}
-        <SolutionSection onOpenLauncher={handleOpenLauncher} />
+        <SolutionSection />
 
         {/* Section D: Fire Prediction App (03) */}
-        <PredictionSection onOpenLauncher={handleOpenLauncher} />
+        <PredictionSection />
 
         {/* Section E: Our Team (04) */}
         <TeamSection />
@@ -78,10 +68,7 @@ export const App: React.FC = () => {
       <Footer />
 
       {/* Persistent Two Floating App Launchers with Informative Modal */}
-      <FloatingAppLauncher
-        initialOpenApp={activeModalApp}
-        onCloseInitial={handleCloseLauncher}
-      />
+      <FloatingAppLauncher />
     </div>
   );
 };

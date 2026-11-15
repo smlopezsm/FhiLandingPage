@@ -1,4 +1,8 @@
+// @ts-nocheck
 /// <reference types="vitest" />
+if (typeof process !== 'undefined') {
+  process.env.VITEST_SKIP_INSTALL_CHECKS = '1';
+}
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 

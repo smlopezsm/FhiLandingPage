@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { FloatingAppLauncher } from '../src/components/layout/FloatingAppLauncher';
+import { EXTERNAL_LINKS } from '../src/config/externalLinks';
 import i18n from '../src/i18n';
 
 describe('FloatingAppLauncher Component', () => {
@@ -8,44 +9,34 @@ describe('FloatingAppLauncher Component', () => {
     i18n.changeLanguage('en');
   });
 
-  it('renders both floating action buttons for Observation and Prediction', () => {
+  it('renders both floating action links pointing to official application URLs in a new tab', () => {
     render(<FloatingAppLauncher />);
 
-    const obsBtn = screen.getByRole('button', { name: /Explore FHI/i });
-    const predBtn = screen.getByRole('button', { name: /Fire Prediction App/i });
+    const obsLink = screen.getByRole('link', { name: /Explore Fire History Interface/i });
+    const predLink = screen.getByRole('link', { name: /Fire Prediction App/i });
 
-    expect(obsBtn).toBeInTheDocument();
-    expect(predBtn).toBeInTheDocument();
+    expect(obsLink).toBeInTheDocument();
+    expect(obsLink).toHaveAttribute('href', EXTERNAL_LINKS.fhi);
+    expect(obsLink).toHaveAttribute('target', '_blank');
+    expect(obsLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    expect(predLink).toBeInTheDocument();
+    expect(predLink).toHaveAttribute('href', EXTERNAL_LINKS.predict);
+    expect(predLink).toHaveAttribute('target', '_blank');
+    expect(predLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('opens informative modal when clicking Explore FHI', () => {
+  it('renders permanent documentation button and shows status notice when clicked', () => {
     render(<FloatingAppLauncher />);
 
-    const obsBtn = screen.getByRole('button', { name: /Explore FHI/i });
-    fireEvent.click(obsBtn);
+    const docBtn = screen.getByRole('button', { name: /Documentation/i });
+    expect(docBtn).toBeInTheDocument();
+    expect(screen.getByText(/Coming Soon/i)).toBeInTheDocument();
 
-    // Modal should be visible
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByText(/Coming Soon for Review/i)).toBeInTheDocument();
+    fireEvent.click(docBtn);
+    expect(screen.getByRole('status')).toBeInTheDocument();
     expect(
-      screen.getByText(/Interactive scientific platform providing 24 years/i)
+      screen.getByText(/Official project documentation in preparation/i)
     ).toBeInTheDocument();
-
-    // Close button should close modal
-    const closeBtn = screen.getByRole('button', { name: /Close/i });
-    fireEvent.click(closeBtn);
-
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-  });
-
-  it('opens informative modal when clicking Fire Prediction App', () => {
-    render(<FloatingAppLauncher />);
-
-    const predBtn = screen.getByRole('button', { name: /Fire Prediction App/i });
-    fireEvent.click(predBtn);
-
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
-    expect(screen.getByText(/Ecosystem Preview · In Development/i)).toBeInTheDocument();
-    expect(screen.getByText(/Forward-looking companion application/i)).toBeInTheDocument();
   });
 });

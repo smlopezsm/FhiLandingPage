@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-transparent border-t border-[#1D322C] text-[#93A39C] pt-14 pb-12 px-4 sm:px-6 lg:px-8 text-xs font-sans relative z-10">
+    <footer className="bg-transparent border-t border-[#1D322C] text-[#93A39C] pt-14 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 text-xs font-sans relative z-10">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-8 border-b border-[#1D322C]">

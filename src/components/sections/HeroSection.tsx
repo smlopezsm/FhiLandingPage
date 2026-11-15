@@ -2,12 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowUpRight } from 'lucide-react';
 import { HeroPlanet3D } from '../visual/HeroPlanet3D';
+import { EXTERNAL_LINKS } from '../../config/externalLinks';
 
 interface HeroSectionProps {
   onOpenLauncher?: (appId: 'observation' | 'prediction') => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
+export const HeroSection: React.FC<HeroSectionProps> = () => {
   const { t } = useTranslation();
 
   return (
@@ -53,9 +54,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
           {/* Dual Action CTAs for Direct System Access */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
             {/* Primary Action: Explore FHI System */}
-            <button
-              type="button"
-              onClick={() => onOpenLauncher?.('observation')}
+            <a
+              href={EXTERNAL_LINKS.fhi}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 min-h-[46px] bg-[#B8EE68] hover:bg-[#C8F77B] text-[#071310] font-title font-bold text-xs sm:text-sm border border-[#B8EE68] shadow-[0_0_24px_rgba(184,238,104,0.35)] hover:shadow-[0_0_32px_rgba(184,238,104,0.5)] transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8EE68] group"
             >
               <span className="relative flex h-2 w-2">
@@ -64,12 +66,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
               </span>
               <span>{t('hero.ctaObservation')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#071310] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </a>
 
             {/* Secondary Action: Companion Fire Prediction App */}
-            <button
-              type="button"
-              onClick={() => onOpenLauncher?.('prediction')}
+            <a
+              href={EXTERNAL_LINKS.predict}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 min-h-[46px] bg-[#0A1A16]/90 hover:bg-[#102B24] text-[#EFF5ED] border border-[#FF9C55]/70 hover:border-[#FF9C55] font-title font-semibold text-xs sm:text-sm shadow-[0_0_20px_rgba(255,156,85,0.2)] hover:shadow-[0_0_28px_rgba(255,156,85,0.35)] backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9C55] group"
             >
               <span className="relative flex h-2 w-2">
@@ -78,7 +81,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLauncher }) => {
               </span>
               <span>{t('hero.ctaPrediction')}</span>
               <ArrowUpRight className="w-4 h-4 text-[#FF9C55] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
